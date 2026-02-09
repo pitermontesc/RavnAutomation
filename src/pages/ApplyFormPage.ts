@@ -4,15 +4,19 @@ import { fillRequiredFieldsByAsterisk, assertRequiredFieldsByAsteriskHaveValue }
 export class ApplyFormPage {
     constructor(private page: Page) { }
 
+    // form(): Locator {
+    //     // 1) Selector exacto por clases del form (muy estable con tu outerHTML)
+    //     const byClasses = this.page.locator('form.bg-white.p-4.rounded-xl').first();
+
+    //     // 2) Fallback: “Personal Details” y subimos al ancestor form
+    //     const byText = this.page.getByText('Personal Details', { exact: true })
+    //         .locator('xpath=ancestor::form[1]');
+
+    //     return byClasses.or(byText).first();
+    // }
     form(): Locator {
-        // 1) Selector exacto por clases del form (muy estable con tu outerHTML)
-        const byClasses = this.page.locator('form.bg-white.p-4.rounded-xl').first();
-
-        // 2) Fallback: “Personal Details” y subimos al ancestor form
-        const byText = this.page.getByText('Personal Details', { exact: true })
-            .locator('xpath=ancestor::form[1]');
-
-        return byClasses.or(byText).first();
+        // Selector directo por clases (según tu outerHTML)
+        return this.page.locator('form.bg-white.p-4.rounded-xl').first();
     }
 
     async assertFormIsOpen() {
@@ -25,5 +29,12 @@ export class ApplyFormPage {
 
     async assertAllRequiredFieldsHaveValue() {
         await assertRequiredFieldsByAsteriskHaveValue(this.form());
+    }
+
+    //added new
+    async waitForFormToRender() {
+        await expect.poll(async () => {
+            return await this.page.locator('input[name="firstName"]').count();
+        }, { timeout: 30000 }).toBe(1);
     }
 }

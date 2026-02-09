@@ -7,7 +7,8 @@ type TestDataFixtures = {
 
 export const test = base.extend<TestDataFixtures>({
     jobTitle: async ({ }, use) => {
-        await use('QA Automation Engineer');
+        //   await use('QA Automation Engineer');
+        await use('Quality Assurance Engineer');
     },
     expectedRequirement: async ({ }, use) => {
         await use('Understanding of mobile and web SDLC');

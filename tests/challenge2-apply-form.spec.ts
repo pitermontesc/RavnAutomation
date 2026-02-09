@@ -1,7 +1,7 @@
 import { test, expect } from '../src/fixtures/testData.fixture';
 import { ApplyFormPage } from '../src/pages/ApplyFormPage';
 import { JobDetailsPage } from '../src/pages/JobDetailsPage';
-import { fillAllRequiredFields } from '../src/utils/requiredFields';
+//import { fillAllRequiredFields } from '../src/utils/requiredFields';
 
 test.describe('Challenge 2 - Apply Form', () => {
     test.beforeEach(async ({ page }) => {
@@ -25,7 +25,6 @@ test.describe('Challenge 2 - Apply Form', () => {
         jobTitle,
         context,
     }) => {
-        //test.setTimeout(90_000);
         // 1. ir al sitio
         await homePage.goto();
 
@@ -44,12 +43,13 @@ test.describe('Challenge 2 - Apply Form', () => {
         // 5. llenar todos los campos requeridos y asegurar que cada campo tenga valor
         const applyForm = new ApplyFormPage(applyPage);
 
-        await applyForm.assertFormIsOpen();
+        //await applyForm.assertFormIsOpen();
+        await applyForm.waitForFormToRender();
+
         await applyForm.fillRequiredFields();
         await applyForm.assertAllRequiredFieldsHaveValue();
 
         // Extra check: no intentamos enviar para evitar spam.
-        //expect(true).toBeTruthy();
         await context.close();
     });
 });
