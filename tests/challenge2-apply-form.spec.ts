@@ -1,23 +1,11 @@
 import { test, expect } from '../src/fixtures/testData.fixture';
 import { ApplyFormPage } from '../src/pages/ApplyFormPage';
 import { JobDetailsPage } from '../src/pages/JobDetailsPage';
-//import { fillAllRequiredFields } from '../src/utils/requiredFields';
 
 test.describe('Challenge 2 - Apply Form', () => {
     test.beforeEach(async ({ page }) => {
         await page.setViewportSize({ width: 1280, height: 720 });
     });
-
-    // test.afterEach(async ({ page }, testInfo) => {
-    //     if (testInfo.status !== testInfo.expectedStatus) {
-    //         console.log(`Test failed: ${testInfo.title}`);
-    //     }
-    //     await page.close();
-    // });
-
-    // test.afterEach(async ({ context }) => {
-    //     await context.close();
-    // });
 
     test('Abrir Apply y llenar todos los campos requeridos con valores', async ({
         homePage,
